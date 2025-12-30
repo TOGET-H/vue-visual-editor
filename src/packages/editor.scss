@@ -39,10 +39,13 @@
 
       &_content {
         margin: 20px auto;
-        width: 1000px;
-        height: 1000px;
+        position: relative;
         background: yellow;
       }
     }
   }
+}
+
+.editor-block{
+  position: absolute;
 }

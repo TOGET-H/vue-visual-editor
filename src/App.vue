@@ -1,7 +1,7 @@
 <script setup>
   import data from './data.json'
   import { ref } from 'vue';
-  import editor from './packages/editor';
+  import Editor from './packages/editor';
 
   const state = ref(data)
 
@@ -12,7 +12,7 @@
 
 <template>
 <div class="app">
-  <editor :data="state"></editor>
+  <Editor v-model="state"></Editor>
 </div>
 </template>
 
