@@ -26,7 +26,7 @@ export default defineComponent({
         {/* 左侧物料区 */}
         {config.componentList.map(component=>(
           <div class="editor-left-item">
-            <span>{component.label}</span>
+            <span class="label">{component.label}</span>
             <span>{component.preview()}</span>
           </div>
         ))

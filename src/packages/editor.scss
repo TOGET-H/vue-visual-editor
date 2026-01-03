@@ -11,7 +11,7 @@
     bottom: 0;
   }
 
-&-left {
+  &-left {
     left: 0;
     width: 250px;
     padding: 15px; // 为容器增加内边距，让里面的卡片不紧贴边缘
@@ -36,20 +36,30 @@
       cursor: move;
       user-select: none;
       transition: all 0.3s ease; // 增加过渡动画，让交互更顺滑
+      position: relative;
 
       // 鼠标悬停时的美化
       &:hover {
         background-color: #ecf5ff; // 悬停时变浅蓝色
-        border-color: #409eff;    // 边框变蓝
+        border-color: #409eff; // 边框变蓝
         box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1); // 增加浮起阴影
         transform: translateY(-2px); // 轻轻向上浮动
       }
 
       // 如果有文字说明，可以单独控制文字样式
-      span {
-        margin-top: 8px;
+      .label {
+        position: absolute;
+        left: -5px;
+        top: -5px;
+        padding: 2px 10px;
         font-size: 12px;
-        color: #606266;
+        color: #ffffff;
+        background-color: #409eff;
+        border-radius: 4px; // 圆角
+        font-weight: 500;
+        line-height: 1.5;
+        text-align: center;
+        white-space: nowrap; // 防止文字换行
       }
     }
   }
@@ -85,6 +95,6 @@
   }
 }
 
-.editor-block{
+.editor-block {
   position: absolute;
 }
