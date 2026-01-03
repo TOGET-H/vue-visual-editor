@@ -5,8 +5,8 @@
     },
     "blocks":[
         {"top":50,"left":50,"key":"text","align":"left","zIndex":2},
-        {"top":100,"left":100,"key":"text","align":"right","zIndex":1},
-        {"top":150,"left":150,"key":"text","align":"center","zIndex":3}
+        {"top":100,"left":100,"key":"button","align":"right","zIndex":1},
+        {"top":150,"left":150,"key":"input","align":"center","zIndex":3}
 
     ]
 }

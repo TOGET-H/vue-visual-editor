@@ -11,8 +11,47 @@
     bottom: 0;
   }
 
-  &-left {
+&-left {
     left: 0;
+    width: 250px;
+    padding: 15px; // 为容器增加内边距，让里面的卡片不紧贴边缘
+    background-color: #f5f7fa; // 改为浅灰色背景，突出白色的卡片
+
+    &-item {
+      width: 100%; // 适应父容器宽度
+      height: 100px; // 固定高度看起来更整齐
+      margin-bottom: 15px; // 卡片之间的间距
+
+      display: flex;
+      flex-direction: column; // 纵向排列，上方预览，下方文字
+      justify-content: center;
+      align-items: center;
+
+      background-color: #fff;
+      border: 1px solid #e0e0e0; // 浅色边框
+      border-radius: 8px; // 圆角化，更现代
+      padding: 10px;
+      box-sizing: border-box; // 修正拼写错误：block-size -> box-sizing
+
+      cursor: move;
+      user-select: none;
+      transition: all 0.3s ease; // 增加过渡动画，让交互更顺滑
+
+      // 鼠标悬停时的美化
+      &:hover {
+        background-color: #ecf5ff; // 悬停时变浅蓝色
+        border-color: #409eff;    // 边框变蓝
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1); // 增加浮起阴影
+        transform: translateY(-2px); // 轻轻向上浮动
+      }
+
+      // 如果有文字说明，可以单独控制文字样式
+      span {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #606266;
+      }
+    }
   }
 
   &-right {

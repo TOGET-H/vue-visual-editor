@@ -1,11 +1,11 @@
 <script setup>
   import data from './data.json'
-  import { ref } from 'vue';
+  import { provide, ref } from 'vue';
   import Editor from './packages/editor';
-
+  import  {registerConfig} from './utils/editor-config.jsx';
   const state = ref(data)
 
-
+  provide('Config', registerConfig);
 
 
 </script>
