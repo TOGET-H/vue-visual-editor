@@ -2,6 +2,7 @@ import { computed, defineComponent, inject, ref } from "vue";
 import './editor.scss'
 import EditorBlock from './editor_block.jsx'
 import { useMenuDragg } from "../packages/useMenuDragg.js";
+import { useFocus } from "../packages/useFocus.js";
 export default defineComponent({
   props: {
     modelValue: {
@@ -29,12 +30,12 @@ export default defineComponent({
 
 
     //获取焦点
+    let { containerMousedown, blockMousedown, focusData } = useFocus(data);
 
 
 
-    //拖拽多个元素
 
-
+   //拖拽多个元素
     const config = inject('Config');
     // console.log(containerStyles.value)
     return () => <div
@@ -62,11 +63,18 @@ export default defineComponent({
         {/* 产生滚动条 */}
         <div class="editor-container-canvas">
           {/* 内容 */}
-          <div class="editor-container-canvas_content" style={containerStyles.value} ref={containRef}>
+          <div class="editor-container-canvas_content" style={containerStyles.value}
+          ref={containRef}
+          onMousedown={containerMousedown}
+          >
             {
 
               (data.value.blocks.map(blocks => (
-                <EditorBlock blocks={blocks} > </EditorBlock>
+                <EditorBlock
+                  class={blocks.focus ? 'editor-blocks-focus' : ''}
+                  blocks={blocks}
+                  onMousedown={(e) => blockMousedown(e, blocks)}
+                > </EditorBlock>
               )))
             }
           </div>
