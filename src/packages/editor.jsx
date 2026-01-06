@@ -47,7 +47,9 @@ export default defineComponent({
           left: e.offsetX,
           key: currentComponent.key,
           align:'left',
-          zIndex: 1
+          zIndex: 1,
+          alignCenter: true,
+
 
         }
        ]}
