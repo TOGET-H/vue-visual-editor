@@ -1,13 +1,14 @@
 import { computed, defineComponent, inject, ref } from "vue";
 import './editor.scss'
 import EditorBlock from './editor_block.jsx'
+import { useMenuDragg } from "../packages/useMenuDragg.js";
 export default defineComponent({
   props: {
     modelValue: {
       type: Object
     }
   },
-  emits:['update:modelValue'],
+  emits: ['update:modelValue'],
   setup(props, ctx) {
     const data = computed({
       get() {
@@ -24,52 +25,16 @@ export default defineComponent({
       height: data.value.container.height + 'px'
     }))
     const containRef = ref(null)
-    var currentComponent = null
-    const dragenter = (e) => {
-      e.dataTransfer.dropEffect = 'move';
-    }
-
-    const dragover = (e) => {
-      e.preventDefault();
-    }
-
-    const dragleave = (e) => {
-      e.dataTransfer.dropEffect = 'none'
-    }
-
-    const drop = (e) => {
-      console.log(currentComponent);
-
-       let blocks = data.value.blocks;
-      data.value = {...data.value,blocks:[
-        ...blocks,{
-          top: e.offsetY,
-          left: e.offsetX,
-          key: currentComponent.key,
-          align:'left',
-          zIndex: 1,
-          alignCenter: true,
+    const { dragstart, dragend } = useMenuDragg(data, containRef);//菜单拖拽
 
 
-        }
-       ]}
-
-        currentComponent = null
-
-    }
-    const dragstart = (e, component) => {
-      //进入元素 dragenter
-      //目标元素经过 要阻止默认行为 dragover
-      //离开元素  增加禁用标识 dragleave
-      //松手时根据拖拽组件添加
-      containRef.value.addEventListener('dragenter',dragenter)
-      containRef.value.addEventListener('dragover',dragover)
-      containRef.value.addEventListener('dragleave',dragleave)
-      containRef.value.addEventListener('drop',drop)
-      currentComponent = component
+    //获取焦点
 
 
-    }
+
+    //拖拽多个元素
+
+
     const config = inject('Config');
     // console.log(containerStyles.value)
     return () => <div
@@ -80,9 +45,10 @@ export default defineComponent({
         {config.componentList.map(component => (
           <div class="editor-left-item"
             draggable
-            onDragstart = {
-              e=> dragstart(e,component)
+            onDragstart={
+              e => dragstart(e, component)
             }
+            onDragend={dragend}
           >
             <span class="label">{component.label}</span>
             <span>{component.preview()}</span>
